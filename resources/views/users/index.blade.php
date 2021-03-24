@@ -282,7 +282,7 @@
         let email_user_act = $('#email').val()
         let dateCurrent = new Date();
         let edad_new = dateCurrent.getFullYear() - nac_user_act.split('-')[0]
-        let url = "{{ route('users.create') }}";
+        let url = "{{ route('users.store') }}";
         $.ajax({
             url: url,
             type: "POST",
