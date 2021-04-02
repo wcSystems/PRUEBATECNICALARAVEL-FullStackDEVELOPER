@@ -6,7 +6,7 @@
             <div class="news-image" style="background-image: url('{{ asset('img/login-bg/login-bg-11.jpg') }} ')"></div>
             <div class="news-caption">
                 <h4 class="caption-title"><b>Anthony Carriedo</b></h4>
-                <p>PRUEBA TÉCNICA LARAVEL - FullStack DEVELOPER - Deploy AWS - 3</p>
+                <p>PRUEBA TÉCNICA LARAVEL - FullStack DEVELOPER - Deploy AWS - 4</p>
             </div>
         </div>
         <div class="right-content">
