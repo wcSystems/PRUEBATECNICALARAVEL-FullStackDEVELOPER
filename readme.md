@@ -1,8 +1,8 @@
 # Devs Only - LARAVEL
 
 LARAVEL - FullStack DEVELOPER
-- git clone 
-- cd directory
+- git clone https://github.com/wcSystems/devs-only-laravel.git
+- cd devs-only-laravel
 - composer install
 - configure, copy and rename: .env-example -> .env
 - php artisan migrate:refresh --seed

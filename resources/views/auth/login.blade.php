@@ -5,8 +5,8 @@
         <div class="news-feed">
             <div class="news-image" style="background-image: url('{{ asset('img/login-bg/login-bg-11.jpg') }} ')"></div>
             <div class="news-caption">
-                <h4 class="caption-title"><b>Anthony Carriedo</b></h4>
-                <p>PRUEBA TÉCNICA LARAVEL - FullStack DEVELOPER - Deploy AWS - 5</p>
+                <h4 class="caption-title"><b>LARAVEL</b></h4>
+                <p>Devs Only</p>
             </div>
         </div>
         <div class="right-content">
