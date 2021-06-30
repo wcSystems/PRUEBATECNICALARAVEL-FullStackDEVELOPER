@@ -23,16 +23,6 @@ Route::resource('users', 'UsersController')->names([
     'destroy' => 'users.destroy'
 ]);
 
-//ruta de emails
-Route::post('/emails/send', 'EmailsController@send')->name('emails.send');
-Route::get('/emails/service', 'EmailsController@service')->name('emails.service');
-Route::resource('emails', 'EmailsController')->names([
-    'index' => 'emails',
-    'create' => 'emails.create',
-    'update' => 'emails.update',
-    'destroy' => 'emails.destroy'
-]);
-
 /* aca redirigimos las rutas inexistentes */
 Route::get('{any}', function() {
     return redirect('login');

@@ -66,17 +66,10 @@
                 </ul>
                 <ul class="nav">
                     <li class="nav-header">Menú</li>
-
                     <li id="user-list" class="has-sub closed">
                         <a href="{{ route('users') }}">
                             <i class="fa fa-users"></i>
                             <span>Usuarios</span>
-                        </a>
-                    </li>
-                    <li id="email-list" class="has-sub closed">
-                        <a href="{{ route('emails') }}">
-                            <i class="fa fa-envelope"></i>
-                            <span>Emails</span>
                         </a>
                     </li>
                     <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
