@@ -1,5 +1,12 @@
-# PRUEBATECNICALARAVEL-FullStackDEVELOPER
-PRUEBA TÉCNICA LARAVEL - FullStack DEVELOPER (Anthony Willinthon Carriedo Peña)
+# Devs only - LARAVEL
+
+LARAVEL - FullStack DEVELOPER
+- git clone 
+- cd directory
+- composer install
+- configure, copy and rename: .env-example -> .env
 - php artisan migrate:refresh --seed
 - php artisan serve
-- user: anthonycarriedo2013@gmail.com, password: 12345678 
+
+LOGIN
+- user: test@devs-only.com, password: 12345678 
