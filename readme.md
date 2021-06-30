@@ -12,6 +12,6 @@ LOGIN
 - user: test@devs-only.com, password: 12345678 
 
 BRANCHS
-- master: Rama principal 
+- master: Rama Principal 
 - augustoDev: Augusto Garcia
 - willinthonDev: Willinthon Carriedo 
