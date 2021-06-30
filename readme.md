@@ -10,3 +10,8 @@ LARAVEL - FullStack DEVELOPER
 
 LOGIN
 - user: test@devs-only.com, password: 12345678 
+
+BRANCHS
+- Master: Rama principal 
+- augustoDev: Augusto 
+- willinthonDev: Willinthon Carriedo 
