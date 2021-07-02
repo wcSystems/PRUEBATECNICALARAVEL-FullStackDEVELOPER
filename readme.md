@@ -1,4 +1,4 @@
-# Devs Only - LARAVEL
+# Devs Only
 
 LARAVEL - FullStack DEVELOPER
 - git clone https://github.com/wcSystems/devs-only-laravel.git
