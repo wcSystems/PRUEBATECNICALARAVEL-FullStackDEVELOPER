@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
-        if($this->app->environment('local')) {
+        if(\App::environment('local')) {
             factory(User::class, 5)->create();
         }
         
