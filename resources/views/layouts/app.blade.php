@@ -7,6 +7,14 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <style>
+        :root {
+            --global-1: none !important;            /*     var(--global-1)    Fondo Template        */     
+            --global-2: #fff !important;          /*     var(--global-2)    Fondo Tablas          */     
+            --global-4: #000 !important;          /*     var(--global-4)    Color textos tabla    */     
+            --global-6: #f067c9 !important;       /*     var(--global-6)    Color primario        */     
+        }
+    </style>
     <link href="{{ asset('css/transparent/app.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}" rel="stylesheet" />
     <link href="{{ asset('plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css') }}" rel="stylesheet" />
@@ -65,14 +73,14 @@
                     </li>
                 </ul>
                 <ul class="nav">
-                    <li class="nav-header">Menú</li>
+                    <li class="nav-header" style="color: #fff !important">Menú</li>
                     <li id="user-list" class="has-sub closed">
                         <a href="{{ route('users') }}">
                             <i class="fa fa-users"></i>
                             <span>Usuarios</span>
                         </a>
                     </li>
-                    <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                    <li><a href="javascript:;" class="sidebar-minify-btn" style="background-color: var(--global-6)" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
                 </ul>
             </div>
         </div>

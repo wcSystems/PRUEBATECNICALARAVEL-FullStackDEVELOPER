@@ -121,7 +121,7 @@
 
 .sw-theme-default > ul.step-anchor > li.done > a {
     border: none !important;
-    color: #000 !important;
+    color: var(--global-2) !important;
     background: transparent !important;
     cursor: pointer;
 }

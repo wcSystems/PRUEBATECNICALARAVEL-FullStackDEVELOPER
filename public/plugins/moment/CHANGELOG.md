@@ -211,7 +211,7 @@ And more locale, build and typescript improvements
 ## New Locales
 * [#3255](https://github.com/moment/moment/pull/3255) [new locale] mi: Maori language
 * [#3267](https://github.com/moment/moment/pull/3267) [new locale] ar-ly: Arabic (Libya) locale
-* [#3333](https://github.com/moment/moment/pull/3333) [new locale] zh-hk: Chinese (Hong Kong) locale
+* [var(--global-1)3](https://github.com/moment/moment/pull/3333) [new locale] zh-hk: Chinese (Hong Kong) locale
 
 ## Bugfixes
 * [#3276](https://github.com/moment/moment/pull/3276) [bugfix] duration: parser: Support ms durations in .NET syntax

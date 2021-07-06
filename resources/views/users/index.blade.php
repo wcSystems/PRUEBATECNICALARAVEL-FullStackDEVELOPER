@@ -3,7 +3,7 @@
 @section('css')
 <style>
     .parsley-normal{
-        border-color: #000 !important
+        border-color: var(--global-2) !important
     }
 </style>
 @endsection
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table id="data-table-default" class="table table-striped table-bordered table-td-valign-middle">
+            <table id="data-table-default" class="table table-bordered table-td-valign-middle" style="width:100% !important">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -115,7 +115,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Nombre y Apellido <span class="text-danger">*</span> </label>
                                 <div class="col-lg-12">
-                                    <input type="text" id="name" name="name" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su Nombre y Apellido" >
+                                    <input type="text" id="name" name="name" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Nombre y Apellido" >
                                     <div id="text-error-name"></div>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Contraseña <span class="text-danger">*</span> </label>
                                 <div class="col-lg-12">
-                                    <input type="password" id="password" name="password" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su Contraseña" >
+                                    <input type="password" id="password" name="password" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Contraseña" >
                                     <div id="text-error-password"></div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Numero de Telefono <span class="text-danger">*</span> </label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="celular" name="celular" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su numero de Telefono" >
+                                    <input type="text"  id="celular" name="celular" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su numero de Telefono" >
                                     <div id="text-error-celular"></div>
                                 </div>
                             </div> 
@@ -142,7 +142,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Numero de Cédula </label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="cedula" name="cedula" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su numero de Cédula" >
+                                    <input type="text"  id="cedula" name="cedula" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su numero de Cédula" >
                                     <div id="text-error-cedula"></div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Fecha de Nacimiento <span class="text-danger">*</span> </label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="nacimiento" name="nacimiento" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su Fecha de Nacimiento" >
+                                    <input type="text"  id="nacimiento" name="nacimiento" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Fecha de Nacimiento" >
                                     <div id="text-error-nacimiento"></div>
                                 </div>
                             </div> 
@@ -160,7 +160,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Email</label>
                                 <div class="col-lg-12">
-                                    <input type="email"  id="email" name="email" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su Email" >
+                                    <input type="email"  id="email" name="email" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Email" >
                                     <div id="text-error-email"></div>
                                 </div>
                             </div>
@@ -184,7 +184,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Nombre y Apellido <span class="text-danger">*</span> </label>
                                 <div class="col-lg-12">
-                                    <input type="text" id="name" name="name" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su Nombre y Apellido" value="${params.name}">
+                                    <input type="text" id="name" name="name" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Nombre y Apellido" value="${params.name}">
                                     <div id="text-error-name"></div>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Numero de Telefono <span class="text-danger">*</span> </label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="celular" name="celular" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su numero de Telefono" value="${params.celular}">
+                                    <input type="text"  id="celular" name="celular" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su numero de Telefono" value="${params.celular}">
                                     <div id="text-error-celular"></div>
                                 </div>
                             </div> 
@@ -202,7 +202,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Numero de Cédula </label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="cedula" name="cedula" disabled class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su numero de Cédula" value="${params.cedula}">
+                                    <input type="text"  id="cedula" name="cedula" disabled class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su numero de Cédula" value="${params.cedula}">
                                     <div id="text-error-cedula"></div>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Fecha de Nacimiento <span class="text-danger">*</span> </label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="nacimiento" name="nacimiento" class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su Fecha de Nacimiento" value="${params.nacimiento}">
+                                    <input type="text"  id="nacimiento" name="nacimiento" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Fecha de Nacimiento" value="${params.nacimiento}">
                                     <div id="text-error-nacimiento"></div>
                                 </div>
                             </div> 
@@ -220,7 +220,7 @@
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Email</label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="email" name="email" disabled class="form-control parsley-normal upper" style="color: #000 !important" placeholder="Ingrese su Email" value="${params.email}">
+                                    <input type="text"  id="email" name="email" disabled class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Email" value="${params.email}">
                                     <div id="text-error-email"></div>
                                 </div>
                             </div>
@@ -348,8 +348,8 @@
                         let url_edit = "{{ route('users.edit', 'user_id' ) }}".replace('user_id', row.id);
                         let url_destroy = "{{ route('users.destroy', 'user_id' ) }}".replace('user_id', row.id);
                         return `
-                            <a onclick="elim(${row.id})" class="btn btn-danger btn-icon btn-circle"><i class="fa fa-times"></i></a>
-                            <a onclick="edit(data_modal_current[${row.id}])" class="btn btn-yellow btn-icon btn-circle"><i class="fas fa-pen"></i></a>
+                            <a onclick="elim(${row.id})" style="color: var(--global-2)" class="btn btn-danger btn-icon btn-circle"><i class="fa fa-times"></i></a>
+                            <a onclick="edit(data_modal_current[${row.id}])" style="color: var(--global-2)" class="btn btn-yellow btn-icon btn-circle"><i class="fas fa-pen"></i></a>
                         `;
                     }
                 },

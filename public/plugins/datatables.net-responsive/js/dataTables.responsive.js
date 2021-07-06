@@ -1174,7 +1174,7 @@ function _childNodesRestore( dt, row, col ) {
 Responsive.renderer = {
 	listHiddenNodes: function () {
 		return function ( api, rowIdx, columns ) {
-			var ul = $('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"/>');
+			var ul = $('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"  style="width:100% !important"/>');
 			var found = false;
 
 			var data = $.each( columns, function ( i, col ) {
@@ -1215,7 +1215,7 @@ Responsive.renderer = {
 			} ).join('');
 
 			return data ?
-				$('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"/>').append( data ) :
+				$('<ul data-dtr-index="'+rowIdx+'" class="dtr-details"  style="width:100% !important"/>').append( data ) :
 				false;
 		}
 	},
