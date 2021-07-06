@@ -12,7 +12,8 @@
             --global-1: none !important;            /*     var(--global-1)    Fondo Template        */     
             --global-2: #fff !important;          /*     var(--global-2)    Fondo Tablas          */     
             --global-4: #000 !important;          /*     var(--global-4)    Color textos tabla    */     
-            --global-6: #f067c9 !important;       /*     var(--global-6)    Color primario        */     
+            --global-6: #7ef067 !important;       /*     var(--global-6)    Color primario        */     
+            /* --global-6: #f0ae67 !important;   */  /*     var(--global-6)    Color primario        */     
         }
     </style>
     <link href="{{ asset('css/transparent/app.min.css') }}" rel="stylesheet" />
