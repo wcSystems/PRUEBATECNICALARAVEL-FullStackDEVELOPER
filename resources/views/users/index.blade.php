@@ -1,19 +1,12 @@
 
 @extends('layouts.app')
-@section('css')
-<style>
-    .parsley-normal{
-        border-color: var(--global-2) !important
-    }
-</style>
-@endsection
 @section('content')
 <div class="panel panel-inverse" data-sortable-id="table-basic-1">
     <div class="panel-heading ui-sortable-handle">
         <h4 class="panel-title"></h4>
         <div class="panel-heading-btn">
-            <button onclick="create()" class="btn btn-success">
-                Crear
+            <button onclick="create()" class="d-flex btn btn-1 btn-success">
+                <i class="m-auto fa fa-lg fa-plus"></i>
             </button>
         </div>
     </div>
@@ -21,33 +14,8 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 form-inline mb-3">
                 <div class="form-group w-100">
-                    <label class="col-xs-12 col-sm-5 col-md-4 col-lg-4 col-form-label">Nombre</label>
-                    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-8">
-                        <input id="search_nombre" type="text" class="form-control w-100">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 form-inline mb-3">
-                <div class="form-group w-100">
-                    <label class="col-xs-12 col-sm-5 col-md-4 col-lg-4 col-form-label">Cédula</label>
-                    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-8">
-                        <input id="search_cedula" type="text" class="form-control w-100">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 form-inline mb-3">
-                <div class="form-group w-100">
-                    <label class="col-xs-12 col-sm-5 col-md-4 col-lg-4 col-form-label">Email</label>
-                    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-8">
-                        <input id="search_email" type="text" class="form-control w-100">
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 form-inline mb-3">
-                <div class="form-group w-100">
-                    <label class="col-xs-12 col-sm-5 col-md-4 col-lg-4 col-form-label">Celular</label>
-                    <div class="col-xs-12 col-sm-7 col-md-6 col-lg-8">
-                        <input id="search_celular" type="text" class="form-control w-100">
+                    <div class="px-0 col-xs-12 col-sm-7 col-md-6 col-lg-8">
+                        <input id="search" type="text" placeholder="Buscar"  class="form-control w-100">
                     </div>
                 </div>
             </div>
@@ -72,13 +40,9 @@
 @endsection
 @section('js')
 <script>
-    /* variables de inicio */
+    $('#users_nav').removeClass("closed").addClass("active").addClass("expand")
     let data_modal_current = []
-    let menu = document.getElementById('user-list');
-    menu.classList.remove("closed");
-    menu.classList.add("active");
-    menu.classList.add("expand");
-
+    
     /* funciones para ejecutar la modal */
     function elim(id) {
         Swal.fire({
@@ -321,83 +285,40 @@
 
     }
     
-    /* funcion requerida para dar propiedad a datatable */
-    function dataTable() {
-        let table = $('#data-table-default').DataTable({
-            searching: false,
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            lengthChange: true,
-            columns: [
-                { data: 'id' },
-                { data: 'name' },
-                { data: 'cedula' },
-                { data: 'email' },
-                { data: 'celular' },
-                { 
-                    render: function ( data,type, row  ) {  
-                        let dateCurrent = new Date();
-                        let año = row.nacimiento.split('-');
-                        return  `${row.nacimiento} ( ${ dateCurrent.getFullYear() - año[0] } Años )`;
-                    }
-                },
-                { 
-                    render: function ( data,type, row  ) {
-                        data_modal_current[row.id] = row
-                        let url_edit = "{{ route('users.edit', 'user_id' ) }}".replace('user_id', row.id);
-                        let url_destroy = "{{ route('users.destroy', 'user_id' ) }}".replace('user_id', row.id);
-                        return `
-                            <a onclick="elim(${row.id})" style="color: var(--global-2)" class="btn btn-danger btn-icon btn-circle"><i class="fa fa-times"></i></a>
-                            <a onclick="edit(data_modal_current[${row.id}])" style="color: var(--global-2)" class="btn btn-yellow btn-icon btn-circle"><i class="fas fa-pen"></i></a>
-                        `;
-                    }
-                },
-            ],
-            ajax: {
-                "url": "{{route('users.service')}}",
-                "data": function (d) {[
-                    d.search_nombre = $('#search_nombre').val(),
-                    d.search_cedula = $('#search_cedula').val(),
-                    d.search_email = $('#search_email').val(),
-                    d.search_celular = $('#search_celular').val(),
-                ]}
-            },
-            columnDefs: [
-                { 
-                    orderable: false, 
-                    targets: 1 
-                }
-            ],
-            language: {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "emptyTable":  "Sin datos disponibles",
-                "zeroRecords": "Ningun resultado encontrado",
-                "info": "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
-                "infoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                "infoEmpty": "Ningun valor disponible",
-                "loadingRecords": "Cargando...",
-                "processing":     "Procesando...",
-                "paginate": {
-                    "first":      "Primero",
-                    "last":       "Ultimo",
-                    "next":       "Siguiente",
-                    "previous":   "Anterior"
-                },
-            }
-        }).on( 'processing.dt', function ( e, settings, processing ) {
-            if(processing){ }else{ }
-        });
-    }
 
-    /* ejecutar despues de cargar la pagina */
-    $(document).ready(function() {
-        dataTable()
-        $("#search_nombre").blur( () =>{ $('#data-table-default').DataTable().ajax.reload() }); 
-        $("#search_cedula").blur( () => { $('#data-table-default').DataTable().ajax.reload() }); 
-        $("#search_email").blur( () => { $('#data-table-default').DataTable().ajax.reload() }); 
-        $("#search_celular").blur( () => { $('#data-table-default').DataTable().ajax.reload() }); 
-    });
+
+
+
+    dataTable("{{route('users.service')}}",[
+        { data: 'id' },
+        { data: 'name' },
+        { data: 'cedula' },
+        { data: 'email' },
+        { data: 'celular' },
+        { 
+            render: function ( data,type, row  ) {  
+                let dateCurrent = new Date();
+                let año = row.nacimiento.split('-');
+                return  `${row.nacimiento} ( ${ dateCurrent.getFullYear() - año[0] } Años )`;
+            }
+        },
+        { 
+            render: function ( data,type, row  ) {
+                data_modal_current[row.id] = row
+                let url_edit = "{{ route('users.edit', 'user_id' ) }}".replace('user_id', row.id);
+                let url_destroy = "{{ route('users.destroy', 'user_id' ) }}".replace('user_id', row.id);
+                return `
+                    <a onclick="elim(${row.id})" style="color: var(--global-2)" class="btn btn-danger btn-icon btn-circle"><i class="fa fa-times"></i></a>
+                    <a onclick="edit(data_modal_current[${row.id}])" style="color: var(--global-2)" class="btn btn-yellow btn-icon btn-circle"><i class="fas fa-pen"></i></a>
+                `;
+            }
+        },
+    ])
+
+
+
+
+ 
 </script>
 @endsection
 

@@ -9,11 +9,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         :root {
-            --global-1: none !important;            /*     var(--global-1)    Fondo Template        */     
-            --global-2: #fff !important;          /*     var(--global-2)    Fondo Tablas          */     
-            --global-4: #000 !important;          /*     var(--global-4)    Color textos tabla    */     
-            --global-6: #7ef067 !important;       /*     var(--global-6)    Color primario        */     
-            /* --global-6: #f0ae67 !important;   */  /*     var(--global-6)    Color primario        */     
+
+            /* COLORES DEFAULT */
+            /*   --global-1: none !important;        Fondo Template        */     
+            /*   --global-2: #fff !important;        Fondo Tablas          */     
+            /*   --global-4: #000 !important;        Color textos tabla    */     
+            /*   --global-6: #7ef067 !important;     Color primario        */
+            
+            --global-2: <?= $palette_colors->color_primary; ?> !important;        
+            --global-4: <?= $palette_colors->color_secondary; ?> !important;        
+            --global-6: <?= $palette_colors->color_tertiary; ?> !important;
         }
     </style>
     <link href="{{ asset('css/transparent/app.min.css') }}" rel="stylesheet" />
@@ -24,15 +29,35 @@
     <link href="{{ asset('plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('plugins/sweetalert/dist/sweetalert.min.css') }}" rel="stylesheet">
     @yield('css')
+
+    {{-- ESTILOS DE CONFIGURACION GLOBAL - SEPARAR EN ARCHIVO- --}}
+    <style>
+        ::placeholder { color: var(--global-2) !important; opacity: 1; }
+        :-ms-input-placeholder {  color: var(--global-2) !important; }
+        ::-ms-input-placeholder { color: var(--global-2) !important; }
+        .btn-1{
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex !important;
+            justify-content: space-around;
+        }
+        .banner-icons{
+            justify-content: space-between !important
+        }
+        .parsley-normal{
+            border-color: var(--global-2) !important
+        }
+    </style>
+
 </head>
 <body>
-    {{ \Carbon\Carbon::setLocale('es') }}
     <div class="page-cover" style="background-image: url('{{ asset('img/login-bg/login-bg-11.jpg') }}');"></div>
     <div id="page-loader" class="fade show"><span class="spinner"></span></div>
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
         <div id="header" class="header navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand"><b>Devs Only </b></a>
+                <a class="navbar-brand"><b>DEVS ONLY COMPANY </b></a>
                 <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -59,29 +84,21 @@
             </ul>
         </div>
         <div id="sidebar" class="sidebar">
-            <div data-scrollbar="true" data-height="100%">
-                <ul class="nav">
-                    <li class="nav-profile">
-                        <a disabled>
-                            <div class="image image-icon bg-black text-grey-darker">
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <div class="info">
-                                {{ Auth::user()->name }}
-                                <small></small>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav">
-                    <li class="nav-header" style="color: #fff !important">Menú</li>
-                    <li id="user-list" class="has-sub closed">
+            <div data-scrollbar="true" data-height="100%" class="banner-icons">
+                <ul class="nav " data-click="pr-0">
+                    <li class="nav-header" style="color: #fff !important">MENÚ</li>
+                    <li id="users_nav" class="has-sub closed">
                         <a href="{{ route('users') }}">
-                            <i class="fa fa-users"></i>
-                            <span>Usuarios</span>
+                            <i class="fa fa-users fa-lg text-white"></i>
+                            <span class="text-white">USUARIOS</span>
                         </a>
                     </li>
-                    <li><a href="javascript:;" class="sidebar-minify-btn" style="background-color: var(--global-6)" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+                    <li id="palette_colors_nav" class="has-sub closed">
+                        <a href="{{ route('palette_colors') }}">
+                            <i class="fas fa-palette fa-lg text-white"></i>
+                            <span class="text-white">PALETA DE COLORES</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -89,7 +106,6 @@
         <div id="content" class="content">
             @yield('content')
         </div>
-        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
     </div>
     <script src="{{ asset('js/app.min.js') }}"></script>
     <script src="{{ asset('js/theme/transparent.min.js') }}"></script>
@@ -102,6 +118,53 @@
     <script src="{{ asset('plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('plugins/moment/min/moment.min.js') }}"></script>
+
+    {{-- pasar estos script aparte para que sean globales --}}
+    <script>
+        function dataTable(url,columns) {
+            $(document).ready(function() {
+                let table = $('#data-table-default').DataTable({
+                    searching: false,
+                    responsive: true,
+                    processing: true,
+                    serverSide: true,
+                    lengthChange: true,
+                    columns: columns,
+                    ajax: {
+                        "url": url,
+                        "data": function (d) {[
+                            d.search = $('#search').val(),
+                        ]}
+                    },
+                    columnDefs: [
+                        { 
+                            orderable: false, 
+                            targets: 1 
+                        }
+                    ],
+                    language: {
+                        "lengthMenu": "Mostrar _MENU_ registros por página",
+                        "emptyTable":  "Sin datos disponibles",
+                        "zeroRecords": "Ningun resultado encontrado",
+                        "info": "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
+                        "infoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "infoEmpty": "Ningun valor disponible",
+                        "loadingRecords": "Cargando...",
+                        "processing":     "Procesando...",
+                        "paginate": {
+                            "first":      "Primero",
+                            "last":       "Ultimo",
+                            "next":       "Siguiente",
+                            "previous":   "Anterior"
+                        },
+                    }
+                }).on( 'processing.dt', function ( e, settings, processing ) {
+                    if(processing){ }else{ }
+                });
+                $("#search").blur( () =>{ $('#data-table-default').DataTable().ajax.reload() }); 
+            });
+        }
+    </script>
     @yield('js')
 </body>
 </html>

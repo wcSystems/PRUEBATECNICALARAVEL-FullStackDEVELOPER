@@ -154,8 +154,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        /* Borrar el usuario */
-
         $current_item = User::find($id);
         if($current_item){
             $current_item->delete();
@@ -167,21 +165,16 @@ class UsersController extends Controller
 
     public function service(Request $request)
     {
-        /* Filtros a la datatable de usuario  */
-
-        /* campos a filtrar */
-        $search_nombre = $request->get('search_nombre');
-        $search_cedula = $request->get('search_cedula');
-        $search_email = $request->get('search_email');
-        $search_celular = $request->get('search_celular');
+        /* FIELDS TO FILTER */
+        $search = $request->get('search');
         
-        /* Query */
-        $query = User::where('name','LIKE','%'.$search_nombre.'%')
-            ->where('cedula','LIKE','%'.$search_cedula.'%')
-            ->where('email','LIKE','%'.$search_email.'%')
-            ->where('celular','LIKE','%'.$search_celular.'%')->get();
+        /* QUERY FILTER */
+        $query = User::where('name','LIKE','%'.$search.'%')
+            ->orWhere('cedula','LIKE','%'.$search.'%')
+            ->orWhere('email','LIKE','%'.$search.'%')
+            ->orWhere('celular','LIKE','%'.$search.'%')->get();
  
-        /* Campos por defecto para la tabla dinamica */
+        /* FIELDS DEFAULTS DATATABLES */
         $draw = $request->get('draw');
         $start = $request->get("start");
         $rowperpage = $request->get("length");

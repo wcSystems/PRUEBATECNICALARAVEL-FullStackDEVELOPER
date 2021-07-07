@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// DATATABLES SERVICES
+Route::get('/users/service', 'UsersController@service')->name('users.service');
+Route::get('/palette_colors/service', 'PaletteColorsController@service')->name('palette_colors.service');
+
+
+
+
