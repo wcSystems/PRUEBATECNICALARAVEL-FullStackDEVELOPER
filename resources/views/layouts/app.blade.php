@@ -16,9 +16,9 @@
             /*   --global-4: #000 !important;        Color textos tabla    */     
             /*   --global-6: #7ef067 !important;     Color primario        */
             
-            --global-2: <?= $palette_colors->color_primary; ?> !important;        
-            --global-4: <?= $palette_colors->color_secondary; ?> !important;        
-            --global-6: <?= $palette_colors->color_tertiary; ?> !important;
+            --global-2: <?= ( $palette_colors ) ? $palette_colors->color_primary : '#fff'; ?> !important;       
+            --global-4: <?= ( $palette_colors ) ? $palette_colors->color_secondary : '#000'; ?> !important;        
+            --global-6: <?= ( $palette_colors ) ? $palette_colors->color_tertiary : '#00cbff'; ?> !important;
         }
     </style>
     <link href="{{ asset('css/transparent/app.min.css') }}" rel="stylesheet" />
