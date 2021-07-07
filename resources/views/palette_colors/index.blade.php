@@ -109,6 +109,7 @@
                     text: 'No serás capaz de recuperar el registro a borrar!',
                     icon: 'error'
                 }
+                break;
             case 4:
                 payload_setting = {
                     url: "/palette_colors/perfil_colors_change",
@@ -144,7 +145,7 @@
                                 $(`#text_error_${item}`).empty().append(`<ul class="parsley-errors-list filled"><li class="parsley-required" style="text-align: left"> ${ res.data[item] } </li></ul>`)
                             })
                         }
-                            if(res.type === 'success'){
+                        if(res.type === 'success'){
                             location.reload();
                         }
                     }
@@ -170,7 +171,7 @@
                 return `
                     <a onclick="modal(3,data_modal_current[${row.id}])" style="color: var(--global-2)" class="btn btn-danger btn-icon btn-circle"><i class="fa fa-times"></i></a>
                     <a onclick="modal(2,data_modal_current[${row.id}])" style="color: var(--global-2)" class="btn btn-yellow btn-icon btn-circle"><i class="fas fa-pen"></i></a>
-                    <a onclick="modal(4,data_modal_current[${row.id}])" style="color: var(--global-2);background-color: #04c142 !important" class="btn btn-yellow btn-icon btn-circle"><i class="fas fa-pen"></i></a>
+                    <a onclick="modal(4,data_modal_current[${row.id}])" style="color: var(--global-2);background-color: #04c142 !important" class="btn btn-yellow btn-icon btn-circle"><i class="fas fa-star"></i></a>
                 `;
             }
         },

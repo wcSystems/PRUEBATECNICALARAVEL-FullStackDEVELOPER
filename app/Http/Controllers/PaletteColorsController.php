@@ -124,12 +124,9 @@ class PaletteColorsController extends Controller
     public function destroy($id)
     {
         $current_item = Palette_color::find($id);
-        if($current_item){
-            $current_item->delete();
-            return response()->json([ 'type' => 'success']);
-        }else{
-            return response()->json([ 'type' => 'error']);
-        }
+        $current_item->delete();
+        return response()->json([ 'type' => 'success']);
+      
     }
 
     public function service(Request $request)
