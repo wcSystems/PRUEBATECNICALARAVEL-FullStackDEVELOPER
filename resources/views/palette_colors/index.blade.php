@@ -35,6 +35,25 @@
             </table>
         </div>
     </div>
+    <template id="my-template">
+        <swal-title>
+          Save changes to "Untitled 1" before closing?
+        </swal-title>
+        <swal-icon type="warning" color="red"></swal-icon>
+        <swal-button type="confirm">
+          Save As
+        </swal-button>
+        <swal-button type="cancel">
+          Cancel
+        </swal-button>
+        <swal-button type="deny">
+          Close without Saving
+        </swal-button>
+        <swal-param name="allowEscapeKey" value="false" />
+        <swal-param
+          name="customClass"
+          value='{ "popup": "my-popup" }' />
+      </template>
 </div>
 @endsection
 @section('js')
@@ -115,7 +134,7 @@
                     url: "/palette_colors/perfil_colors_change",
                     type: 'POST',
                     html: false,
-                    title: `Perfil de colores N# ${params.id}`,
+                    title: `Perfil de colores #${params.id}`,
                     text: 'Seguro que desea establecer este perfil?',
                     icon: 'info'
                 }
@@ -126,6 +145,10 @@
             html: payload_setting.html,
             text: payload_setting.text,
             icon: payload_setting.icon,
+            confirmButtonText: '<i class="fa fa-save"></i>',
+            showCloseButton: true,
+            confirmButtonColor: `{!! ( $palette_colors ) ? $palette_colors->color_tertiary: '#00cbff !important' !!}`,
+            allowOutsideClick: false,
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({

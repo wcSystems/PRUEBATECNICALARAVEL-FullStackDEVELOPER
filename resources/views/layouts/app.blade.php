@@ -19,6 +19,7 @@
             --global-2: <?= ( $palette_colors ) ? $palette_colors->color_primary : '#fff'; ?> !important;       
             --global-4: <?= ( $palette_colors ) ? $palette_colors->color_secondary : '#000'; ?> !important;        
             --global-6: <?= ( $palette_colors ) ? $palette_colors->color_tertiary : '#00cbff'; ?> !important;
+            --global-7: rgba(38,38,38,.95) !important;
         }
     </style>
     <link href="{{ asset('css/transparent/app.min.css') }}" rel="stylesheet" />
@@ -47,6 +48,15 @@
         }
         .parsley-normal{
             border-color: var(--global-2) !important
+        }
+        .right-content{
+            background-color: var(--global-6) !important
+        }
+        .navbar-brand:hover{
+            color: var(--global-6) !important
+        }
+        .sidebar{
+            background-color: var(--global-7) !important
         }
     </style>
 

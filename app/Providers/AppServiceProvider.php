@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function (View $view) {
             $palette_colors = Palette_color::where([
                 ["active","=",1],
-                ["user_id","=",Auth::user()->id],
+                ["user_id","=",( Auth::user() ) ? Auth::user()->id : 0],
             ])->first();
 
             $view->with('palette_colors', $palette_colors);
