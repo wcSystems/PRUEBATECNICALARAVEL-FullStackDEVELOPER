@@ -67,11 +67,7 @@
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
         <div id="header" class="header navbar-default">
             <div class="navbar-header">
-<<<<<<< HEAD
                 <a class="navbar-brand"><b>SISTEMAS </b></a>
-=======
-                <a class="navbar-brand"><b>DEVS ONLY COMPANY OTRO </b></a>
->>>>>>> 44cd4ec0755cb718db1ea21826a646758ba47510
                 <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
