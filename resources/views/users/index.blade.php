@@ -27,7 +27,7 @@
                         <th>#</th>
                         <th>Nombre y Apellido</th>
                         <th>Cédula</th>
-                        <th>Email</th>
+                        <th>Usuario</th>
                         <th>Celular</th>
                         <th>Fecha de Nacimiento</th>
                         <th>Acciones</th>
@@ -42,7 +42,7 @@
 <script>
     $('#users_nav').removeClass("closed").addClass("active").addClass("expand")
     let data_modal_current = []
-    
+
     /* funciones para ejecutar la modal */
     function elim(id) {
         Swal.fire({
@@ -100,7 +100,7 @@
                                     <input type="text"  id="celular" name="celular" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su numero de Telefono" >
                                     <div id="text-error-celular"></div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group row m-b-0">
@@ -118,13 +118,13 @@
                                     <input type="text"  id="nacimiento" name="nacimiento" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Fecha de Nacimiento" >
                                     <div id="text-error-nacimiento"></div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Email</label>
+                                <label class=" text-lg-right col-form-label"> Usuario</label>
                                 <div class="col-lg-12">
-                                    <input type="email"  id="email" name="email" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Email" >
+                                    <input type="email"  id="email" name="email" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Usuario" >
                                     <div id="text-error-email"></div>
                                 </div>
                             </div>
@@ -160,7 +160,7 @@
                                     <input type="text"  id="celular" name="celular" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su numero de Telefono" value="${params.celular}">
                                     <div id="text-error-celular"></div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group row m-b-0">
@@ -178,13 +178,13 @@
                                     <input type="text"  id="nacimiento" name="nacimiento" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Fecha de Nacimiento" value="${params.nacimiento}">
                                     <div id="text-error-nacimiento"></div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Email</label>
+                                <label class=" text-lg-right col-form-label"> Usuario</label>
                                 <div class="col-lg-12">
-                                    <input type="text"  id="email" name="email" disabled class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Email" value="${params.email}">
+                                    <input type="text"  id="email" name="email" disabled class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese su Usuario" value="${params.email}">
                                     <div id="text-error-email"></div>
                                 </div>
                             </div>
@@ -284,7 +284,7 @@
         });
 
     }
-    
+
 
 
 
@@ -295,14 +295,14 @@
         { data: 'cedula' },
         { data: 'email' },
         { data: 'celular' },
-        { 
-            render: function ( data,type, row  ) {  
+        {
+            render: function ( data,type, row  ) {
                 let dateCurrent = new Date();
                 let año = row.nacimiento.split('-');
                 return  `${row.nacimiento} ( ${ dateCurrent.getFullYear() - año[0] } Años )`;
             }
         },
-        { 
+        {
             render: function ( data,type, row  ) {
                 data_modal_current[row.id] = row
                 let url_edit = "{{ route('users.edit', 'user_id' ) }}".replace('user_id', row.id);
@@ -318,7 +318,7 @@
 
 
 
- 
+
 </script>
 @endsection
 

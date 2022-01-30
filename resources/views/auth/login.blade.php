@@ -5,14 +5,14 @@
         <div class="news-feed">
             <div class="news-image" style="background-image: url('{{ asset('img/login-bg/login-bg-11.jpg') }} ')"></div>
             <div class="news-caption">
-                <h4 class="caption-title"><b>LARAVEL</b></h4>
-                <p>Devs Only</p>
+                <h4 class="caption-title"><b>HOTEL INTERNACIONAL VALENCIA</b></h4>
+                <p>Administracion de equipos conectados a la red de Sistemas</p>
             </div>
         </div>
         <div class="right-content">
             <div class="login-header">
                 <div class="brand">
-                    <small>Ingrese su Email y contraseña</small>
+                    <small>Ingrese sus Credenciales</small>
                 </div>
                 <div class="icon">
                     <i class="fa fa-sign-in"></i>
@@ -22,7 +22,7 @@
                 <form method="POST" action="{{ route('login') }}" class="margin-bottom-0">
                     @csrf
                     <div class="form-group m-b-15">
-                        <input type="email" name="email" class="form-control form-control-lg  @error('email') is-invalid @enderror" placeholder="Dirección Email" value="{{ old('email') }}" required autocomplete="email" autofocus />
+                        <input type="text" name="email" class="form-control form-control-lg  @error('email') is-invalid @enderror" placeholder="Usuario" value="{{ old('email') }}" required autocomplete="email" autofocus />
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

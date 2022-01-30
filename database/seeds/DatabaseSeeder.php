@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Type;
+use App\Block;
+use App\Network;
 use Illuminate\Support\Facades\URL;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UsersTableSeeder::class);
-        if(\App::environment('local')) {
-            factory(User::class, 5)->create();
-        }
-        
+        $this->call(TypesTableSeeder::class);
+        $this->call(BlocksTableSeeder::class);
+        $this->call(NetworksTableSeeder::class);
     }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>FullStack DEVELOPER</title>
+    <title>Sistemas HIV</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -11,13 +11,13 @@
         :root {
 
             /* COLORES DEFAULT */
-            /*   --global-1: none !important;        Fondo Template        */     
-            /*   --global-2: #fff !important;        Fondo Tablas          */     
-            /*   --global-4: #000 !important;        Color textos tabla    */     
+            /*   --global-1: none !important;        Fondo Template        */
+            /*   --global-2: #fff !important;        Fondo Tablas          */
+            /*   --global-4: #000 !important;        Color textos tabla    */
             /*   --global-6: #7ef067 !important;     Color primario        */
-            
-            --global-2: <?= ( $palette_colors ) ? $palette_colors->color_primary : '#fff'; ?> !important;       
-            --global-4: <?= ( $palette_colors ) ? $palette_colors->color_secondary : '#000'; ?> !important;        
+
+            --global-2: <?= ( $palette_colors ) ? $palette_colors->color_primary : '#fff'; ?> !important;
+            --global-4: <?= ( $palette_colors ) ? $palette_colors->color_secondary : '#000'; ?> !important;
             --global-6: <?= ( $palette_colors ) ? $palette_colors->color_tertiary : '#00cbff'; ?> !important;
             --global-7: rgba(38,38,38,.95) !important;
         }
@@ -67,7 +67,7 @@
     <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
         <div id="header" class="header navbar-default">
             <div class="navbar-header">
-                <a class="navbar-brand"><b>DEVS ONLY COMPANY </b></a>
+                <a class="navbar-brand"><b>SISTEMAS </b></a>
                 <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -94,23 +94,69 @@
             </ul>
         </div>
         <div id="sidebar" class="sidebar">
+
             <div data-scrollbar="true" data-height="100%" class="banner-icons">
                 <ul class="nav " data-click="pr-0">
                     <li class="nav-header" style="color: #fff !important">MENÚ</li>
+
+                    <li id="devices_nav" class="has-sub closed">
+                        <a href="{{ route('devices') }}">
+                            <i class="fas fa-desktop fa-lg text-white"></i>
+                            <span class="text-white">DISPOSITIVOS</span>
+                        </a>
+                    </li>
+
+                    <li id="teams_nav" class="has-sub closed">
+                        <a href="{{ route('teams') }}">
+                            <i class="fas fa-desktop fa-lg text-white"></i>
+                            <span class="text-white">EQUIPOS</span>
+                        </a>
+                    </li>
+
+                    <li id="diagrams_nav" class="has-sub closed">
+                        <a href="{{ route('diagrams') }}">
+                            <i class="fas fa-desktop fa-lg text-white"></i>
+                            <span class="text-white">DIAGRAMA</span>
+                        </a>
+                    </li>
+
                     <li id="users_nav" class="has-sub closed">
                         <a href="{{ route('users') }}">
                             <i class="fa fa-users fa-lg text-white"></i>
                             <span class="text-white">USUARIOS</span>
                         </a>
                     </li>
+
+                    {{-- <li id="blocks_nav" class="has-sub closed">
+                        <a href="{{ route('blocks') }}">
+                            <i class="fas fa-cubes fa-lg text-white"></i>
+                            <span class="text-white">BLOQUES</span>
+                        </a>
+                    </li>
+
+                    <li id="types_nav" class="has-sub closed">
+                        <a href="{{ route('types') }}">
+                            <i class="fas fa-server fa-lg text-white"></i>
+                            <span class="text-white">TIPOS DE DISPOSITIVOS</span>
+                        </a>
+                    </li>
+                    <li id="networks_nav" class="has-sub closed">
+                        <a href="{{ route('networks') }}">
+                            <i class="fas fa-network-wired fa-lg text-white"></i>
+                            <span class="text-white">NODOS</span>
+                        </a>
+                    </li>
+
                     <li id="palette_colors_nav" class="has-sub closed">
                         <a href="{{ route('palette_colors') }}">
                             <i class="fas fa-palette fa-lg text-white"></i>
-                            <span class="text-white">PALETA DE COLORES</span>
+                            <span class="text-white">COLORES</span>
                         </a>
-                    </li>
+                    </li> --}}
+
                 </ul>
             </div>
+
         </div>
         <div class="sidebar-bg"></div>
         <div id="content" class="content">
@@ -144,12 +190,15 @@
                         "url": url,
                         "data": function (d) {[
                             d.search = $('#search').val(),
+                            d.search_network = $('#search_network').val(),
+                            d.search_type = $('#search_type').val(),
+                            d.search_block = $('#search_block').val(),
                         ]}
                     },
                     columnDefs: [
-                        { 
-                            orderable: false, 
-                            targets: 1 
+                        {
+                            orderable: false,
+                            targets: 1
                         }
                     ],
                     language: {
@@ -171,7 +220,10 @@
                 }).on( 'processing.dt', function ( e, settings, processing ) {
                     if(processing){ }else{ }
                 });
-                $("#search").blur( () =>{ $('#data-table-default').DataTable().ajax.reload() }); 
+                $("#search").blur( () =>{ $('#data-table-default').DataTable().ajax.reload() });
+                $("#search_network").change( () =>{ $('#data-table-default').DataTable().ajax.reload() });
+                $("#search_type").change( () =>{ $('#data-table-default').DataTable().ajax.reload() });
+                $("#search_block").change( () =>{ $('#data-table-default').DataTable().ajax.reload() });
             });
         }
     </script>

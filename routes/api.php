@@ -19,8 +19,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // DATATABLES SERVICES
 Route::get('/users/service', 'UsersController@service')->name('users.service');
+Route::get('/types/service', 'TypesController@service')->name('types.service');
+Route::get('/blocks/service', 'BlocksController@service')->name('blocks.service');
+Route::get('/networks/service', 'NetworksController@service')->name('networks.service');
+Route::get('/devices/service', 'DevicesController@service')->name('devices.service');
 Route::get('/palette_colors/service', 'PaletteColorsController@service')->name('palette_colors.service');
+Route::get('/teams/service', 'TeamsController@service')->name('teams.service');
 
 
 
 
+Route::get('devices/export', 'DevicesController@export');

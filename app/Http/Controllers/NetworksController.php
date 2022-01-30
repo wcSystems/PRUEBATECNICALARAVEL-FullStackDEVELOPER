@@ -1,9 +1,11 @@
 <?php
-namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\User;
 
-class UsersController extends Controller
+namespace App\Http\Controllers;
+use App\Network;
+
+use Illuminate\Http\Request;
+
+class NetworksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        return view('networks.index');
     }
 
     /**
@@ -22,6 +24,7 @@ class UsersController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -32,51 +35,34 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        /* Crear el usuario - primero se valida y despues se procede a ejecutar la accion */
-
         $error = [];
-        if($request->get('name') == ''){
-            $error['name'] = 'Ingrese un Nombre y Apellido';
+        if($request->get('a') == ''){
+            $error['a'] = 'Ingrese un Numero';
         }
-        if(strlen($request->get('name')) > 100){
-            $error['name'] = 'El Nombre no puede exceder los 100 Caracteres';
+        if(strlen($request->get('a')) > 3){
+            $error['a'] = 'Error de Longitud';
         }
-        if($request->get('celular') == ''){
-            $error['celular'] = 'Ingrese un Numero de Telefono';
+        if($request->get('b') == ''){
+            $error['b'] = 'Ingrese un Numero';
         }
-        if($request->get('cedula') == ''){
-            $error['cedula'] = 'Ingrese un Numero de Cedula';
+        if(strlen($request->get('b')) > 3){
+            $error['b'] = 'Error de Longitud';
         }
-        if($request->get('email') == ''){
-            $error['email'] = 'Ingrese un Usuario';
+        if($request->get('c') == ''){
+            $error['c'] = 'Ingrese un Numero';
         }
-        if(strlen($request->get('celular')) > 10){
-            $error['celular'] = 'El Numero Celular no puede exceder los 10 Caracteres';
-        }
-        if(strlen($request->get('cedula')) > 11){
-            $error['cedula'] = 'El Numero de Cedula no puede exceder los 11 Caracteres';
-        }
-        if(  User::where('cedula',$request->get('cedula'))->select('cedula')->first()    ){
-            $error['cedula'] = 'El Numero de Cedula ya se encuentra registrado';
-        }
-        if(strlen($request->get('password')) < 8){
-            $error['password'] = 'La contraseña es muy corta';
-        }
-        if(  User::where('email',$request->get('email'))->select('email')->first()    ){
-            $error['email'] = 'Este Usuario ya se encuentra registrado';
+        if(strlen($request->get('c')) > 3){
+            $error['c'] = 'Error de Longitud';
         }
         if($error){
             return response()->json([ 'type' => 'error','data' => $error]);
         }else{
             $values = [
-                'name' => $request->get('name'),
-                'password' => bcrypt($request->get('password')),
-                'cedula' => $request->get('cedula'),
-                'email' => $request->get('email'),
-                'nacimiento' => $request->get('nacimiento'),
-                'celular' => $request->get('celular'),
+                'a' => $request->get('a'),
+                'b' => $request->get('b'),
+                'c' => $request->get('c'),
             ];
-            $current_item = new User($values);
+            $current_item = new Network($values);
             $current_item->save();
             return response()->json([ 'type' => 'success', 'data' => $current_item]);
         }
@@ -90,7 +76,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -101,7 +87,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -113,28 +99,32 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /* Editar el usuario - primero se valida y despues se procede a ejecutar la accion */
-
         $error = [];
-        if($request->get('name') == ''){
-            $error['name'] = 'Ingrese un Nombre y Apellido';
+        if($request->get('a') == ''){
+            $error['a'] = 'Ingrese un Numero';
         }
-        if(strlen($request->get('name')) > 100){
-            $error['name'] = 'El Nombre no puede exceder los 100 Caracteres';
+        if(strlen($request->get('a')) > 3){
+            $error['a'] = 'Error de Longitud';
         }
-        if($request->get('celular') == ''){
-            $error['celular'] = 'Ingrese un Numero de Telefono';
+        if($request->get('b') == ''){
+            $error['b'] = 'Ingrese un Numero';
         }
-        if(strlen($request->get('celular')) > 10){
-            $error['celular'] = 'El Numero Celular no puede exceder los 10 Caracteres';
+        if(strlen($request->get('b')) > 3){
+            $error['b'] = 'Error de Longitud';
+        }
+        if($request->get('c') == ''){
+            $error['c'] = 'Ingrese un Numero';
+        }
+        if(strlen($request->get('c')) > 3){
+            $error['c'] = 'Error de Longitud';
         }
         if($error){
             return response()->json([ 'type' => 'error','data' => $error]);
         }else{
-            $current_item = User::find($id);
-            $current_item->name = $request->get('name');
-            $current_item->celular = $request->get('celular');
-            $current_item->nacimiento = $request->get('nacimiento');
+            $current_item = Network::find($id);
+            $current_item->a = $request->get('a');
+            $current_item->b = $request->get('b');
+            $current_item->c = $request->get('c');
             $current_item->save();
             return response()->json([ 'type' => 'success', 'data' => $current_item]);
         }
@@ -148,7 +138,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $current_item = User::find($id);
+        $current_item = Network::find($id);
         if($current_item){
             $current_item->delete();
             return response()->json([ 'type' => 'success']);
@@ -163,10 +153,9 @@ class UsersController extends Controller
         $search = $request->get('search');
 
         /* QUERY FILTER */
-        $query = User::where('name','LIKE','%'.$search.'%')
-            ->orWhere('cedula','LIKE','%'.$search.'%')
-            ->orWhere('email','LIKE','%'.$search.'%')
-            ->orWhere('celular','LIKE','%'.$search.'%')->get();
+        $query = Network::where('a','LIKE','%'.$search.'%')
+            ->orWhere('b','LIKE','%'.$search.'%')
+            ->orWhere('c','LIKE','%'.$search.'%')->get();
 
         /* FIELDS DEFAULTS DATATABLES */
         $draw = $request->get('draw');
@@ -175,7 +164,7 @@ class UsersController extends Controller
         $columnIndex_arr = $request->get('order');
         $columnName_arr = $request->get('columns');
         $order_arr = $request->get('order');
-        $totalRecords = count(User::all());
+        $totalRecords = count(Network::all());
         $totalRecordswithFilter = count($query);
 
         echo json_encode(array(
