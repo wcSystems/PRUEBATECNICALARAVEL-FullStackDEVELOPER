@@ -13,5 +13,4 @@ LOGIN
 
 BRANCHS
 - master: Rama Principal 
-- augustoDev: Augusto Garcia
 - willinthonDev: Willinthon Carriedo 
