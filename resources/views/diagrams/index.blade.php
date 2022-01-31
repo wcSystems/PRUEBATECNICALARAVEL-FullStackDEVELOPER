@@ -5,9 +5,9 @@
         .bgp {
             border-radius: 5px;
             color: #ffffff !important;
-            font-size: 14px;
-            padding: 20px 0px;
-            width: 300px;
+            font-size: 12px;
+            padding: 10px 0px;
+            width: 200px;
             display: block;
             cursor: pointer;
             text-align: center;
@@ -41,28 +41,28 @@
     <div class="panel-body">
         @foreach($teams as $item1)
             @if ($item1->team_id == null)
-                <div class="bgp bgp-01 mb-3">
+                <div class="bgp bgp-01">
                     {{ $item1->title }} <br /> {{ $item1->ip }}
                 </div>
-                <div style="margin-left:50px">
+                <div class="ml-5 mb-5">
                     @foreach($teams as $item2)
                         @if ($item2->team_id == $item1->id )
-                            <a href="https://{{ $item2->ip }}" target="_blank" class="bgp bgp-02 mb-3">
+                            <a href="https://{{ $item2->ip }}" target="_blank" class="bgp bgp-02">
                                 {{ $item2->title }} <br /> {{ $item2->ip }}
                             </a>
-                            <div style="margin-left:50px">
+                            <div class="ml-5 mb-5">
                                 @foreach($teams as $item3)
                                     @if ($item3->team_id == $item2->id )
-                                        <div class="bgp bgp-03 mb-3">
+                                        <div class="bgp bgp-03">
                                             {{ $item3->title }} <br /> {{ $item3->ip }}
                                         </div>
-                                        <div style="margin-left:50px">
+                                        <div class="ml-5 mb-5">
                                             @foreach($teams as $item4)
                                                 @if ($item4->team_id == $item3->id && $item4->group !== 0 )
-                                                    <div class="bgp bgp-04 mb-3">
+                                                    <div class="bgp bgp-04">
                                                         {{ $item4->title }} <br /> {{ $item4->ip }}
                                                     </div>
-                                                    <div style="margin-left:50px">
+                                                    <div class="ml-5 mb-5">
                                                         @foreach($teams as $item5)
                                                             @if ($item5->team_id == $item4->id )
                                                                 <a href="https://{{ $item5->ip }}" target="_blank" class="bgp bgp-05 mb-3">
@@ -73,7 +73,7 @@
                                                     </div>
                                                 @endif
                                                 @if ($item4->team_id == $item3->id && $item4->group === 0 )
-                                                    <a href="https://{{ $item4->ip }}" target="_blank" class="bgp bgp-05 mb-3">
+                                                    <a href="https://{{ $item4->ip }}" target="_blank" class="bgp bgp-05">
                                                         {{ $item4->title }} <br /> {{ $item4->ip }}
                                                     </a>
                                                 @endif
