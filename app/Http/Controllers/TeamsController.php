@@ -14,7 +14,13 @@ class TeamsController extends Controller
      */
     public function index()
     {
-        return view('teams.index');
+        $masters = Team::leftjoin('teams as master','master.id','=','teams.team_id')
+                       ->where('teams.group','!=','0')
+                       ->get([
+                            'teams.*',
+                            'master.title as master'
+                        ]);
+        return view('teams.index')->with('masters',$masters);
     }
 
     /**
@@ -96,7 +102,13 @@ class TeamsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $current_item = Team::find($id);
+        if($current_item){
+            $current_item->delete();
+            return response()->json([ 'type' => 'success']);
+        }else{
+            return response()->json([ 'type' => 'error']);
+        }
     }
 
     public function service(Request $request)
@@ -104,11 +116,12 @@ class TeamsController extends Controller
         /* FIELDS TO FILTER */
         $search = $request->get('search');
 
-        $query = Team::where('ip','LIKE','%'.$search.'%')
+        /* $query = Team::where('ip','LIKE','%'.$search.'%')
             ->orWhere('title','LIKE','%'.$search.'%')
             ->orWhere('user','LIKE','%'.$search.'%')
             ->orWhere('password','LIKE','%'.$search.'%')
-            ->orWhere('description','LIKE','%'.$search.'%')->get();
+            ->orWhere('description','LIKE','%'.$search.'%')->get(); */
+            $query =Team::all();
 
         /* FIELDS DEFAULTS DATATABLES */
         $draw = $request->get('draw');

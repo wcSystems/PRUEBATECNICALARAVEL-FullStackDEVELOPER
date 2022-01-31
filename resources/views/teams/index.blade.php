@@ -75,16 +75,6 @@
             html:`
                 <form id="form_user_create" >
                     <div class="row">
-
-                        <div class="col-sm-6">
-                            <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Tipo <span class="text-danger">*</span> </label>
-                                <select id="group" class="form-control w-100" onchange="typeGroup()">
-                                    <option value="1"selected  >Agrupador</option>
-                                    <option value="0" >Dispositivo</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
                                 <label class=" text-lg-right col-form-label"> Titulo <span class="text-danger">*</span> </label>
@@ -94,29 +84,45 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div id="type" class="row d-none">
-                            <div class="col-sm-6">
-                                <div class="form-group row m-b-0">
-                                    <label class=" text-lg-right col-form-label"> Master <span class="text-danger">*</span> </label>
-                                    <select id="team_id" class="form-control w-100">
-                                        <option value="0"selected >Ninguno</option>
-                                        <option value="0" >Dispositivo</option>
-                                    </select>
+                        <div class="col-sm-6">
+                            <div class="form-group row m-b-0">
+                                <label class=" text-lg-right col-form-label"> Ip</label>
+                                <div class="col-lg-12">
+                                    <input type="text" id="ip" name="ip" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." >
+                                    <div id="text-error-ip"></div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group row m-b-0">
-                                    <label class=" text-lg-right col-form-label"> Ip <span class="text-danger">*</span> </label>
-                                    <div class="col-lg-12">
-                                        <input type="text" id="ip" name="ip" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." >
-                                        <div id="text-error-ip"></div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group row m-b-0">
+                                <label class=" text-lg-right col-form-label"> Master</label>
+                                <select id="team_id" class="form-control w-100">
+                                    <option value=""selected >Ninguno</option>
+                                    @foreach( $masters as $item )
+                                        <option value="{{ $item->id }}" >
+                                            @if($item->team_id)
+                                                <span> {{ strtoupper($item->master) }} </span> -> {{ ucwords($item->title) }}
+                                            @else
+                                                {{ strtoupper($item->title) }}
+                                            @endif
+                                            </option>
+                                    @endforeach
+                                </select>
                             </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group row m-b-0">
+                                <label class=" text-lg-right col-form-label"> Tipo</label>
+                                <select id="group" class="form-control w-100" onchange="typeGroup()">
+                                    <option value="1"selected >Agrupador</option>
+                                    <option value="0" >Dispositivo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="isdevice" class="row d-none">
                             <div class="col-sm-6">
                                 <div class="form-group row m-b-0">
-                                    <label class=" text-lg-right col-form-label"> Usuario <span class="text-danger">*</span> </label>
+                                    <label class=" text-lg-right col-form-label"> Usuario</label>
                                     <div class="col-lg-12">
                                         <input type="text" id="user" name="user" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." >
                                         <div id="text-error-user"></div>
@@ -125,17 +131,16 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group row m-b-0">
-                                    <label class=" text-lg-right col-form-label"> Contraseña <span class="text-danger">*</span> </label>
+                                    <label class=" text-lg-right col-form-label"> Contraseña</label>
                                     <div class="col-lg-12">
                                         <input type="text" id="password" name="password" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." >
                                         <div id="text-error-password"></div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-sm-12">
                                 <div class="form-group row m-b-0">
-                                    <label class=" text-lg-right col-form-label"> Descripcion <span class="text-danger">*</span> </label>
+                                    <label class=" text-lg-right col-form-label"> Descripcion</label>
                                     <div class="col-lg-12">
                                         <textarea id="description" name="description" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..."></textarea>
                                         <div id="text-error-description"></div>
@@ -143,7 +148,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm-12" style="margin-top:20px">
                             <button onclick="create_Submit()" type="button" class="swal2-confirm swal2-styled" aria-label="" style="display: inline-block;">Crear</button>
                         </div>
@@ -151,6 +155,23 @@
                 </form>`
         })
     }
+
+    function typeGroup(){
+        let type = parseInt($('#group').val())
+        switch (type) {
+            case 0:
+                $('#isdevice').removeClass('d-none')
+                break;
+            case 1:
+                $('#isdevice').addClass('d-none')
+                break;
+
+            default:
+                $('#isdevice').addClass('d-none')
+                break;
+        }
+    }
+
     function edit(params) {
 
         Swal.fire({
@@ -161,16 +182,17 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Host <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> Host</label>
                                 <div class="col-lg-12">
                                     <input type="number" id="host" name="host" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." value="${params.host}" >
                                     <div id="text-error-host"></div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Nombre <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> Nombre</label>
                                 <div class="col-lg-12">
                                     <input type="text" id="name" name="name" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." value="${params.name}" >
                                     <div id="text-error-name"></div>
@@ -179,7 +201,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Usuario <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> Usuario</label>
                                 <div class="col-lg-12">
                                     <input type="text" id="username" name="username" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." value="${params.username}" >
                                     <div id="text-error-username"></div>
@@ -188,7 +210,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Contraseña <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> Contraseña</label>
                                 <div class="col-lg-12">
                                     <input type="text" id="password" name="password" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." value="${params.password}" >
                                     <div id="text-error-password"></div>
@@ -197,7 +219,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> SSID <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> SSID</label>
                                 <div class="col-lg-12">
                                     <input type="text" id="ssid" name="ssid" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." value="${params.ssid}" >
                                     <div id="text-error-ssid"></div>
@@ -206,7 +228,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Contraseña SSID <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> Contraseña SSID</label>
                                 <div class="col-lg-12">
                                     <input type="text" id="ssid_password" name="ssid_password" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." value="${params.ssid_password}" >
                                     <div id="text-error-ssid_password"></div>
@@ -215,7 +237,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> MAC <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> MAC</label>
                                 <div class="col-lg-12">
                                     <input type="text" id="mac" name="mac" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." value="${params.mac}" >
                                     <div id="text-error-mac"></div>
@@ -224,7 +246,7 @@
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group row m-b-0">
-                                <label class=" text-lg-right col-form-label"> Descripcion <span class="text-danger">*</span> </label>
+                                <label class=" text-lg-right col-form-label"> Descripcion</label>
                                 <div class="col-lg-12">
                                     <textarea type="text" id="description" name="description" class="form-control parsley-normal upper" style="color: var(--global-2) !important" placeholder="Ingrese ..." >${params.description}</textarea>
                                     <div id="text-error-description"></div>
@@ -241,7 +263,6 @@
         $('#type_id').val(params.type_id)
         $('#block_id').val(params.block_id)
     };
-
     /* funciones para hacer el crud */
     function edit_Submit(id) {
         let network_id = $('#network_id').val()
@@ -287,12 +308,16 @@
         });
 
     }
+
+
+
+
     function create_Submit() {
 
         let url = "{{ route('teams.store') }}";
         let payload = {
             _token: $("meta[name='csrf-token']").attr("content"),
-            group: $('#group').val(),
+            group: ( $('#team_id').val() === '' && parseInt($('#group').val()) === 0 ) ? 2 : $('#group').val(),
             title: $('#title').val(),
             team_id: $('#team_id').val(),
             ip: $('#ip').val(),
@@ -300,14 +325,12 @@
             password: $('#password').val(),
             description: $('#description').val()
         }
-        console.log(payload)
         $.ajax({
             url: url,
             type: "POST",
             data: payload,
             success: function (res) {
-                console.log(res)
-                /* if(res.type === 'error'){
+                if(res.type === 'error'){
                     Object.keys(res.data).find( ( item ) => {
                         $(`#${item}`).removeClass('parsley-normal').addClass('parsley-error')
                         $(`#text-error-${item}`).empty().append(`<ul class="parsley-errors-list filled"><li class="parsley-required" style="text-align: left"> ${ res.data[item] } </li></ul>`)
@@ -315,58 +338,42 @@
                 }
                 if(res.type === 'success'){
                     location.reload();
-                } */
+                }
             }
         });
 
     }
 
-    function typeGroup(){
-        let group = parseInt($('#group').val())
-        switch (group) {
-            case 1:
-                $('#type').addClass('d-none')
-                break;
-            case 0:
-                $('#type').removeClass('d-none')
-                break;
-            default:
-                $('#type').addClass('d-none')
-                break;
-        }
-    }
-
-
-
     dataTable("{{route('teams.service')}}",[
         {
-            render: function ( data,type, row  ) {
-                return data;
+            render: function ( data,type, row, setting  ) {
+                return setting.row+1;
             }
         },
         {
             render: function ( data,type, row  ) {
-                return row.ip;
+                let ip = ( row.ip !== null ) ? `<a href="https://${row.ip}" target="_blank"> ${row.ip} </a>` : 'N/A'
+                return ip;
             }
         },
         {
             render: function ( data,type, row  ) {
-                return row.title;
+                return ( row.title !== null ) ? row.title : 'N/A';
             }
         },
         {
             render: function ( data,type, row  ) {
-                return row.user;
+                return ( row.user !== null ) ? row.user : 'N/A';
             }
         },
         {
             render: function ( data,type, row  ) {
-                return row.password;
+                return ( row.password !== null ) ? row.password : 'N/A';
             }
         },
         {
             render: function ( data,type, row  ) {
-                return row.description;
+                return ( row.description !== null ) ? row.description : 'N/A';
             }
         },
         {

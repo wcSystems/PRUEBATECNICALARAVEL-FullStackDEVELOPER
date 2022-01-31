@@ -70,7 +70,7 @@ Route::resource('teams', 'TeamsController')->names([
 ]);
 
 // VIEW AND CRUD - DIAGRAMS
-Route::get('/diagrams', 'Diagrams@index')->name('diagrams');
+Route::get('/diagrams', 'DiagramsController@index')->name('diagrams');
 
 // PERFIL_COLOR_CHANGE
 Route::post('/palette_colors/perfil_colors_change', 'PaletteColorsController@perfil_colors_change')->name('palette_colors.perfil_colors_change');

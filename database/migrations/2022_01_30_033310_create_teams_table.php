@@ -15,14 +15,14 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->nullable();
+            $table->string('title')->unique();
             $table->string('ip')->nullable();
             $table->string('user')->nullable();
             $table->string('password')->nullable();
             $table->string('description')->nullable();
             $table->boolean('group')->default(true);
-            $table->unsignedBigInteger('team_id')->default(0);
-            $table->foreign('team_id')->references('id')->on('teams');
+            $table->bigInteger('team_id')->nullable()->unsigned();
+            $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade');
             $table->timestamps();
         });
     }

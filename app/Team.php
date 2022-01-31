@@ -8,7 +8,7 @@ use App\Team;
 class Team extends Model
 {
     protected $fillable = [
-        'group'
+        'title','group','team_id','ip','user','password','description'
     ];
 
     public function parent()
